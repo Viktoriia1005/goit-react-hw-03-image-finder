@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ToastContainer } from "react-toastify";
+import { animateScroll as scroll } from "react-scroll";
 import './App.css'
 
 import api from '../services/api'
@@ -7,6 +8,7 @@ import Searchbar from "./Searchbar";
 import ImageGallery from "./ImageGallery";
 import Modal from "./Modal";
 import LoadMore from './Button'
+import Loader from './Loader';
 
 
 
@@ -34,7 +36,6 @@ export default class App extends Component {
         .fetchImages(searchInfo, page)
         .then((data) => data.hits)
         .then((images) => {
-          // console.log(images);
           this.setState({ data: images, status: "resolved" });
         })
         .catch((error) => this.setState({ error, status: "rejected" }));
@@ -53,7 +54,7 @@ export default class App extends Component {
           }))
         )
         .catch((error) => this.setState({ error, status: "rejected" }));
-      // scroll.scrollToBottom();
+      scroll.scrollToBottom();
     }
   }
 
@@ -75,7 +76,7 @@ export default class App extends Component {
   };
 
   scrollToBottom = () => {
-    // scroll.scrollToBottom();
+    scroll.scrollToBottom();
   };
 
   render() {
@@ -87,23 +88,14 @@ export default class App extends Component {
         {status === "idle" && <p className='welcomeText'>Please enter your search term</p>}
 
         {status === "pending" && (
-          <div>
-            {/* <Loader
-              type="Puff"
-              color="#00BFFF"
-              height={100}
-              width={100}
-              timeout={3000} //3 secs
-            /> */}
-            <ImageGallery data={data} />
-          </div>
+          <Loader />
         )}
 
         {status === "resolved" && (
           <div>
             <ImageGallery data={data} onOpenModal={this.toggleModal} />
             {data.length > 0 && <LoadMore onLoadMore={this.onLoadMore} />}
-            <ToastContainer autoClose={2000} position="top-right" />
+            <ToastContainer autoClose={1000} position="top-right" />
           </div>
         )}
 

@@ -18,6 +18,7 @@ body {
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  place-content: center;
 }
 
 img {
@@ -36,4 +37,9 @@ img {
   color: #303f9f;
   font-size: large;
   font-family: cursive;
+}
+
+.TailSpin {
+  position: relative;
+  margin: 0 auto;
 }

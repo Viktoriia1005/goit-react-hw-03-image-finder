@@ -32,6 +32,12 @@ img {
   grid-gap: 16px;
   padding-bottom: 24px;
 }
+
+.AppGallery {
+  display: flex;
+  flex-direction: column;
+}
+
 .welcomeText {
   text-align: center;
   color: #303f9f;

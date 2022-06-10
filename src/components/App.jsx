@@ -80,6 +80,7 @@ export default class App extends Component {
   };
 
   render() {
+    
     const { status, data, currImg } = this.state;
     return (
       <div className="App">
@@ -92,10 +93,9 @@ export default class App extends Component {
         )}
 
         {status === "resolved" && (
-          <div>
+          <div className='AppGallery'>
             <ImageGallery data={data} onOpenModal={this.toggleModal} />
             {data.length > 0 && <LoadMore onLoadMore={this.onLoadMore} />}
-            <ToastContainer autoClose={1000} position="top-right" />
           </div>
         )}
 
@@ -110,6 +110,8 @@ export default class App extends Component {
             <img src={currImg.largeImageURL} alt={currImg.tags} />
           </Modal>
         )}
+        <ToastContainer autoClose={2000} position="top-right" />
+
       </div>
     );
   }

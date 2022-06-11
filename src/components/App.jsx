@@ -29,7 +29,7 @@ export default class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { page, searchInfo } = this.state;
 
-    if (prevState.searchInfo !== searchInfo) {
+    if (prevState.searchInfo !== searchInfo ) {
       this.setState({ status: "pending", page: 1 });
 
       api
@@ -41,7 +41,7 @@ export default class App extends Component {
         .catch((error) => this.setState({ error, status: "rejected" }));
     }
 
-    if (prevState.page !== page) {
+    if (prevState.page !== page && page !== 1) {
       this.setState({ status: "pending" });
 
       api
@@ -59,7 +59,7 @@ export default class App extends Component {
   }
 
   handleSubmitForm = (searchInfo) => {
-    this.setState({ searchInfo });
+    this.setState({ searchInfo, data: [], page: 1 });
   };
 
   onLoadMore = () => {

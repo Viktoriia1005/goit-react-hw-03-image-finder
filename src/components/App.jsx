@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { animateScroll as scroll } from "react-scroll";
 import './App.css'
 
@@ -58,8 +59,20 @@ export default class App extends Component {
     }
   }
 
-  handleSubmitForm = (searchInfo) => {
-    this.setState({ searchInfo, data: [], page: 1 });
+  // handleSubmitForm = (searchInfo) => {
+  //   this.setState({ searchInfo, data: [], page: 1 });
+  // };
+
+  handleSubmitForm = searchInfo => {
+    if (this.state.searchInfo !== searchInfo) {
+      this.setState({
+        searchInfo: searchInfo,
+        page: 1,
+      });
+    }
+    if (this.state.searchInfo === searchInfo) {
+      return toast.warning(`You already here "${searchInfo}"`);
+    }
   };
 
   onLoadMore = () => {
